@@ -1,0 +1,170 @@
+<content th:fragment="content" th:remove="tag">
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+    <aside class="app-sidebar ">
+        <div class="sidebar-img">
+            <a class="navbar-brand" th:href="@{/home/index.html}">
+                <img alt="..." class="navbar-brand-img main-logo" th:src="@{/assets/img/brand/favicon.png}">
+                <img alt="..." class="navbar-brand-img logo" th:src="@{/assets/img/brand/favicon.png}">
+            </a>
+            <ul class="side-menu">
+                <!--<li class="slide">-->
+                    <!--<a class="side-menu__item" data-toggle="slide" href="#">-->
+                        <!--<i class="side-menu__icon fe fe-home"></i>-->
+                        <!--<span class="side-menu__label">TRANG CHỦ</span>-->
+                    <!--</a>-->
+                <!--</li>-->
+                <li class="slide" sec:authorize="hasAnyAuthority('SADMIN','ADMIN')">
+                    <a class="side-menu__item" data-toggle="slide" href="#">
+                        <i class="side-menu__icon fe fe-grid"></i>
+                        <span class="side-menu__label">TIỆN ÍCH</span>
+                        <i class="angle fa fa-angle-right"></i>
+                    </a>
+                    <ul class="slide-menu">
+                        <li>
+                            <a th:href="@{/tools/calm}" class="slide-item">Tính tiền</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="slide" sec:authorize="hasAnyAuthority('SADMIN','ADMIN')">
+                    <a class="side-menu__item" data-toggle="slide" href="#">
+                        <i class="side-menu__icon fe fe-grid"></i>
+                        <span class="side-menu__label">NEW</span>
+                        <i class="angle fa fa-angle-right"></i>
+                    </a>
+                    <ul class="slide-menu">
+                        <li>
+                            <a th:href="@{/news/index.html}" class="slide-item">Quản lý news</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/home/index.html}" class="slide-item">Home New</a>
+                        </li>
+                    </ul>
+                </li>
+				<!--<li class="slide" sec:authorize="hasAnyAuthority('SADMIN','ADMIN','CSKH','VMS_ADMIN','REPORT','VMS_REPORT')">-->
+                    <!--<a class="side-menu__item" data-toggle="slide" href="#">-->
+                        <!--<i class="side-menu__icon fe fe-dollar-sign"></i>-->
+                        <!--<span class="side-menu__label">BÁO CÁO</span>-->
+                        <!--<i class="angle fa fa-angle-right"></i>-->
+                    <!--</a>-->
+                    <!--<ul class="slide-menu">-->
+                        <!--<li>-->
+                            <!--<a th:href="@{/report/revenue-day.html}" class="slide-item">Doanh thu theo ngày</a>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                    <!--<ul class="slide-menu">-->
+                        <!--<li>-->
+                            <!--<a th:href="@{/report/revenue-day-pkg.html}" class="slide-item">Doanh thu theo gói</a>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                    <!--&lt;!&ndash;<ul class="slide-menu">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<li>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<a th:href="@{/report/revenue-week.html}" class="slide-item">Doanh thu theo tuần</a>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</li>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<ul class="slide-menu">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<li>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<a th:href="@{/report/revenue-month.html}" class="slide-item">Doanh thu theo tháng</a>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</li>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+                    <!--<ul class="slide-menu">-->
+                        <!--<li>-->
+                            <!--<a th:href="@{/report/quantity-day.html}" class="slide-item">Sản lượng theo ngày</a>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                    <!--<ul class="slide-menu">-->
+                        <!--<li>-->
+                            <!--<a th:href="@{/report/quantity-day-pkg.html}" class="slide-item">Sản lượng theo gói</a>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                <!--</li>-->
+                <!--<li class="slide" sec:authorize="hasAnyAuthority('SADMIN','ADMIN','CSKH','VMS_ADMIN')">-->
+                    <!--<a class="side-menu__item" data-toggle="slide" href="#">-->
+                        <!--<i class="side-menu__icon fe fe-credit-card"></i>-->
+                        <!--<span class="side-menu__label">CSKH</span>-->
+                        <!--<i class="angle fa fa-angle-right"></i>-->
+                    <!--</a>-->
+                    <!--<ul class="slide-menu">-->
+                        <!--<li>-->
+                            <!--<a th:href="@{/cskh/subscriber/index.html}" class="slide-item">Thông tin thuê bao</a>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                    <!--<ul class="slide-menu">-->
+                        <!--<li>-->
+                            <!--<a th:href="@{/cskh/history/index-momt.html}" class="slide-item">Lịch sử MO/MT</a>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                    <!--<ul class="slide-menu">-->
+                        <!--<li>-->
+                            <!--<a th:href="@{/cskh/history/index-charge.html}" class="slide-item">Lịch sử trừ cước</a>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                <!--</li>-->
+                <!--<li class="slide" sec:authorize="hasAnyAuthority('SADMIN','ADMIN','CSKH','VMS_ADMIN')">-->
+                    <!--<a class="side-menu__item" data-toggle="slide" href="#">-->
+                        <!--<i class="side-menu__icon fe fe-box"></i>-->
+                        <!--<span class="side-menu__label">CTKM</span>-->
+                        <!--<i class="angle fa fa-angle-right"></i>-->
+                    <!--</a>-->
+                    <!--<ul class="slide-menu">-->
+                        <!--<li>-->
+                            <!--<a th:href="@{/ctkm/report-topup.html}" class="slide-item">Báo cáo KQ trao thưởng</a>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                    <!--<ul class="slide-menu">-->
+                        <!--<li>-->
+                            <!--<a th:href="@{/ctkm/report-effect-promo.html}" class="slide-item">Báo cáo hiệu quả CTKM</a>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                    <!--<ul class="slide-menu">-->
+                        <!--<li>-->
+                            <!--<a th:href="@{/ctkm/sub-promo.html}" class="slide-item">Thuê bao tham gia CTKM</a>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                    <!--<ul class="slide-menu" sec:authorize="hasAnyAuthority('SADMIN','ADMIN','CSKH')">-->
+                        <!--<li>-->
+                            <!--<a th:href="@{/ctkm/top-point.html}" class="slide-item">Danh sách TOP điểm</a>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                    <!--<ul class="slide-menu" sec:authorize="hasAnyAuthority('SADMIN','ADMIN','CSKH')">-->
+                        <!--<li>-->
+                            <!--<a th:href="@{/ctkm/history-point.html}" class="slide-item">Lịch sử cộng điểm</a>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                <!--</li>-->
+                <!--<li class="slide" sec:authorize="hasAnyAuthority('SADMIN','CONTENT')">-->
+                    <!--<a class="side-menu__item" data-toggle="slide" href="#">-->
+                        <!--<i class="side-menu__icon fe fe-credit-card"></i>-->
+                        <!--<span class="side-menu__label">TIỆN ÍCH</span>-->
+                        <!--<i class="angle fa fa-angle-right"></i>-->
+                    <!--</a>-->
+					<!--<ul class="slide-menu">-->
+                        <!--<li>-->
+                            <!--<a th:href="@{/utility/vistore/album-store.html}" class="slide-item">Quản lý ViStore</a>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                    <!--&lt;!&ndash;<ul class="slide-menu">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<li>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<a th:href="@{/utility/vistore/video-monitor.html}" class="slide-item">Kiểm duyệt Video</a>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</li>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+                <!--</li>-->
+                <li class="slide">
+                    <a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon fe fe-user"></i><span class="side-menu__label">TÀI KHOẢN</span><i class="angle fa fa-angle-right"></i></a>
+                    <ul class="slide-menu">
+                        <li sec:authorize="hasAnyAuthority('SADMIN')">
+                            <a th:href="@{/account/index.html}" class="slide-item">QUẢN LÝ TÀI KHOẢN</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/account/change_password.html}" class="slide-item">ĐỔI MẬT KHẨU</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/logout.html}" class="slide-item">ĐĂNG XUẤT</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </aside>
+    <!-- Sidebar menu-->
+</content>

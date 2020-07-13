@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <content th:replace="contents/init :: head"></content>
+    <title>Trang chủ</title>
+</head>
+<body class="app sidebar-mini rtl" >
+<div id="global-loader" ></div>
+<div class="page">
+    <div class="page-main">
+        <content th:replace="contents/menu-bar :: content"></content>
+
+        <!-- Main Content-->
+        <div class="app-content ">
+            <div class="side-app">
+                <div class="main-content">
+                    <!--Top Navigator-->
+                    <content th:replace="contents/top-nav :: content"></content>
+                    <div class="container-fluid pt-8" style="min-height: 400px">
+                        <!-- Short menu -->
+                        <div class="page-header mt-0 shadow p-3">
+                            <ol class="breadcrumb mb-sm-0">
+                                <li class="breadcrumb-item"><a th:href="@{/news/index.html}"><i class="side-menu__icon fe fe-home"></i></a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Quan ly News</li>
+                            </ol>
+                        </div>
+
+                        <div id="messageResult" th:class="${messageResult != null and #strings.startsWith(messageResult,'ERROR:')} ? 'alert alert-danger' : 'alert alert-success'"
+                             th:if="${messageResult}" th:text="${messageResult != null and messageResult != ''} ? ${#strings.replace(messageResult,'ERROR:','')} : ''"></div>
+
+                        <div class="row">
+                            <div class="col-md-12 pad10_lr">
+                                <div class="card shadow">
+                                    <div class="card-header">
+                                        <h2 class="mb-0">TÌM KIẾM</h2>
+                                    </div>
+                                    <div class="card-body">
+                                        <form id="frmData" th:object="${formObj}" th:action="@{/news/search-index.html}"  method="POST" class="frmMain">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label">THỂ LOẠI</label>
+                                                        <input class="form-control" type="text" name="typeNews" th:field="${formObj.typeNews}" maxlength="200" placeholder="" value=""/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label">TIÊU ĐỀ</label>
+                                                        <input class="form-control" type="text" name="title" th:field="${formObj.title}"  maxlength="200" placeholder="" value=""/>
+                                                    </div>
+
+<!--                                                    <div class="form-group">-->
+<!--                                                        <label class="form-label">VIEWS</label>-->
+<!--                                                        <input class="form-control" type="text" name="views" th:field="${formObj.views}"  maxlength="200" placeholder="" value=""/>-->
+<!--                                                    </div>-->
+
+                                                </div>
+                                                <div class="col-md-12 btn-submit-form align-center">
+                                                    <div class="form-group">
+                                                        <button type="submit" class="btn btn-primary btn-width100">SEARCH</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-12 pad10_lr">
+                                <div class="card shadow">
+                                    <div class="card-header">
+                                        <h2 class="mb-0">QUAN LY NEWS</h2>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="pad5rem-bottom">
+                                            <div class="col-md-2 no-pad float-left">
+                                                <content th:replace="contents/pageSize :: content"></content>
+                                            </div>
+                                            <div class="col-md-10 no-pad float-right" style="margin-bottom: 15px;">
+                                                <button type="button" class="btn btn-info dropdown-toggle float-right magin-left5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ACTION</button>
+                                                <div class="dropdown-menu">
+                                                    <a th:href="@{/news/create.html}">
+                                                        <span class="dropdown-item">ADD</span>
+                                                    </a>
+
+                                                </div>
+                                                <content th:replace="contents/panigator :: content(page = ${page})"></content>
+                                            </div>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table id="tblData" class="table table-striped table-bordered w-100 text-nowrap">
+                                                <thead>
+                                                <tr>
+                                                    <th class="text-center">IMAGE</th>
+                                                    <th class="text-center ">TYPE</th>
+                                                    <th class="text-center " >TITLE</th>
+                                                    <th class="text-center ">CONTENT</th>
+
+<!--                                                    <th class="text-center">REPLIES</th>-->
+<!--                                                    <th class="text-center">VIEWS</th>-->
+<!--                                                    <th class="text-center">ACTIVITY</th>-->
+<!--                                                    <th class="text-center">VOTES</th>-->
+                                                    <th class="text-center " >STATUS</th>
+                                                    <th class="text-center  ">SỬA</th>
+                                                    <th class="text-center" >XÓA</th>
+
+                                                </tr>
+                                                </thead>
+                                                <tbody th:if="${page.content}">
+                                                <tr th:each="eachRow, iterStat : ${page.content}">
+                                                    <td class="text-center">
+                                                        <a>
+                                                            <img
+                                                                    class="thumbnail"
+                                                                    th:src="@{'getimage/'+${eachRow.image}}"
+                                                                    style="height: 100px; width: 100px;border-radius: 10px"
+                                                            /></a>
+                                                    </td>
+                                                    <td class="text-center" th:text="${eachRow.typeNews}"></td>
+                                                    <td class="text-center" style="max-width: 100px; white-space: break-spaces;" th:text="${eachRow.title}"></td>
+                                                    <td ><div style="width: 350px;
+    overflow: scroll;
+    /*text-overflow: ellipsis;*/
+    line-height: 25px;
+    /*height: 150px;*/
+    white-space: nowrap"><p  class="text-center" th:utext="${eachRow.iconLike}"></p></div></td>
+
+<!--                                                    <td class="text-right" th:text="${eachRow.replies}"></td>-->
+<!--                                                    <td class="text-right" th:text="${eachRow.views}"></td>-->
+<!--                                                    <td class="text-right" th:text="${eachRow.activity}"></td>-->
+<!--                                                    <td class="text-right" th:text="${eachRow.votes}"></td>-->
+                                                    <td class="text-center" data-title="Trạng thái">
+                                                        <span class="btn btn-success btn-width200 pad3rem" th:if="${eachRow.status}== 1">ACTIVE</span>
+<!--                                                        <span class="btn btn-danger btn-width200 pad3rem" th:if="${eachRow.status}== 0">DEACTIVE</span>-->
+                                                   </td>
+                                                    <td class="text-center"   data-title="Sửa">
+                                                        <a  th:href="@{/news/update.html/{id}(id=${eachRow.id})}"  data-toggle="tooltip" title="Sửa">
+                                                            <button  class="btn btn-info btn-circle">
+                                                                <i class="fe fe-edit"></i>
+                                                            </button>
+                                                        </a>
+                                                    </td>
+                                                    <td class="text-center" data-title="Xóa">
+                                                        <a href="#modal-dlg" th:if="${eachRow.status} != 0"  data-toggle="modal" th:data-id="${eachRow.id}" title="Xóa">
+                                                            <button th:disabled="${eachRow.status}== 0"  class="btn btn-info btn-circle">
+                                                                <i class="fe fe-trash"></i>
+                                                            </button>
+                                                        </a>
+                                                        <a href="#modal-dlg" th:if="${eachRow.status}== 0"  data-toggle="modal" th:data-id="${eachRow.id}" title="Xóa">
+                                                            <button th:disabled="${eachRow.status}== 0"  class="btn btn-info btn-circle">
+                                                                <i class="fe fe-trash"></i>
+                                                            </button>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <tr class="table_empty" th:if="${#lists.isEmpty(page.content)}">
+                                                    <td colspan="4">KHÔNG CÓ BẢN GHI!</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Footer-->
+                        <content th:replace="contents/footer :: content"></content>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<content th:replace="contents/modalDialog :: delete"></content>
+<!-- Back to top -->
+<a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
+<content th:replace="contents/init :: script"></content>
+
+<script>
+    var CONTEXT_PATH = $('#contextPath').val();
+
+    $('#modal-dlg').on('show.bs.modal', function(e) {
+        var id = $(e.relatedTarget).data('id');
+        console.log(id);
+        $(e.currentTarget).find('button[name="btnYes"]').click(function(){
+            console.log(CONTEXT_PATH);
+            window.location = "/news/delete.html/" + id;
+        });
+    });
+
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+    $("#messageResult").hide().fadeIn(0).delay(3000).fadeOut(1000);
+</script>
+
+</body>
+</html>

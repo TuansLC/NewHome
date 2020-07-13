@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <content th:replace="contents/init :: head"></content>
+    <title>Trang chủ</title>
+    <style>
+        .help-block {color: red}
+    </style>
+</head>
+<body class="app sidebar-mini rtl" >
+<div id="global-loader" ></div>
+<div class="page">
+    <div class="page-main">
+        <content th:replace="contents/menu-bar :: content"></content>
+
+        <!-- Main content-->
+        <div class="app-content ">
+            <div class="side-app">
+                <div class="main-content">
+                    <content th:replace="contents/top-nav :: content"></content>
+                    <div class="container-fluid pt-8">
+                        <!-- Short menu -->
+                        <div class="page-header mt-0 shadow p-3">
+                            <ol class="breadcrumb mb-sm-0">
+                                <li class="breadcrumb-item">
+                                    <a th:href="@{/home/index.html}"><i class="side-menu__icon fe fe-home"></i></a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a th:href="@{/home/index.html}" data-toggle="tooltip" title="Quản lý tài news">Quản lý tài news</a>
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">Thêm mới news</li>
+                            </ol>
+                        </div>
+
+                        <!-- Message display -->
+                        <div id="messageResult" th:class="${messageResult != null and #strings.startsWith(messageResult,'ERROR:')} ? 'alert alert-danger' : 'alert alert-success'"
+                             th:if="${messageResult}" th:text="${messageResult != null and messageResult != ''} ? ${#strings.replace(messageResult,'ERROR:','')} : ''">
+                        </div>
+                        <!-- Message display -->
+
+                        <div class="row">
+                            <div class="col-md-12 pad10_lr">
+                                <div class="card shadow">
+                                    <div class="card-header">
+                                        <h2 class="mb-0">THÊM MỚI NEWS</h2>
+                                    </div>
+
+                                    <div class="card-body">
+
+                                        <form th:object="${newbNews}" th:action="@{/news/create.html}" enctype="multipart/form-data"  method="POST" class="frmMain">
+                                            <div class="row">
+                                                <input type="hidden" id="contextPath" th:value="@{/}">
+                                                <!--                                                <div id="errorMessage" class="alert alert-danger" style="text-align:left; color: red; font-weight: bold; font-size: 13px;" th:each="err: ${#fields.errors('*')}" th:text="${err}"></div>-->
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Tiêu đề</label>
+                                                        <input class="form-control" type="text" name="msisdn" th:field="*{title}" maxlength="250" />
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="form-label">Thể loại</label>
+                                                        <input class="form-control" type="text" name="packageCode" th:field="*{typeNews}" maxlength="250" />
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="form-label">Link ảnh</label>
+                                                        <input class="form-control" type="file" name="file" id="file" accept="image/png, image/jpeg" maxlength="250" />
+                                                    </div>
+
+
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Votes</label>
+                                                        <input class="form-control" type="text" name="activeChannel" th:field="*{votes}" maxlength="50" />
+                                                        <!--                                                           <td th:if="${#fields.hasErrors('activeChannel')}" th:errors="*{activeChannel}">Name Error</td>-->
+                                                    </div>
+
+
+                                                    <div class="form-group">
+                                                        <label class="form-label">Replies</label>
+                                                        <input class="form-control" type="text" name="note" th:field="*{replies}" maxlength="50" />
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="form-label">Views</label>
+                                                        <input class="form-control" type="text" name="note" th:field="*{views}" maxlength="50" />
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="form-label">Activity</label>
+                                                        <input class="form-control" type="text" name="note" th:field="*{activity}" maxlength="50" />
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="form-label">Content</label>
+                                                    <textarea id="editor" class="form-control" type="text" name="iconLike" th:field="*{iconLike}" maxlength="500"></textarea>
+                                                </div>
+                                                <div class="col-md-12 btn-submit-form align-center">
+                                                    <div class="form-group">
+                                                        <button type="submit" class="btn btn-success btn-width100">ADD NEW</button>
+                                                        <a th:href="@{/news/index.html}" class="btn btn-primary btn-width100">BACK</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <content th:replace="contents/footer :: content"></content>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Back to top -->
+<a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
+<content th:replace="contents/init :: script"></content>
+<script>
+    var CONTEXT_PATH = $('#contextPath').val();
+
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+    $(document).ready(function () {
+        $('.frmMain').bootstrapValidator({
+            feedbackIcons: {
+                valid: '',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            }
+        })
+    });
+
+    $("#messageResult").hide().fadeIn(0).delay(2000).fadeOut(1000);
+</script>
+<script>
+    CKEDITOR.replace('editor');
+</script>
+</body>
+</html>

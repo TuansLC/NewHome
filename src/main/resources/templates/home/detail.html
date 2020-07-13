@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <link
+            rel="stylesheet"
+            th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}"
+            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+            crossorigin="anonymous"
+    />
+    <script
+            th:src="@{https://code.jquery.com/jquery-3.2.1.slim.min.js}"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"
+    ></script>
+    <script
+            th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js}"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"
+    ></script>
+    <script
+            th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js}"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"
+    ></script>
+    <link
+            rel="stylesheet"
+            th:href="@{https://use.fontawesome.com/releases/v5.7.0/css/all.css}"
+            integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
+            crossorigin="anonymous"
+    />
+
+    <style>
+        html {
+            font-family: "Muli", sans-serif;
+        }
+
+        .header {
+            height: 60px;
+            background-color: white;
+            box-shadow: 0px 0px 5px 0px;
+            position: sticky;
+            top: 0px;
+        }
+
+        .wrap {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .logo img {
+            height: 2.5em;
+            margin-top: 10px;
+        }
+
+        .img-logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .group-items {
+            display: flex;
+            align-items: center;
+        }
+
+        .btn-custom {
+            background-color: #0f4466;
+            color: white;
+            padding: 6px 10px;
+            height: 30px;
+            margin-left: 10px;
+            padding-top: 1px;
+        }
+
+        .btn-custom1 {
+            background-color: #0f4466;
+            color: white;
+            padding: 6px 10px;
+            height: 30px;
+            padding-top: 1px;
+        }
+
+        .content {
+            margin-top: 20px;
+        }
+
+        .voting {
+            float: left;
+            margin-right: 15px;
+        }
+
+        .topic {
+            background: aqua;
+            display: inline;
+        }
+
+        .count {
+            border: 3px solid #ddeffa;
+            text-align: center;
+            font-size: 1.3195em;
+            height: 40px;
+        }
+
+        .text-voting {
+            margin-top: 0.35em;
+        }
+
+        .badge-green {
+            background-color: #12a89d;
+            color: white;
+        }
+
+        .topic-area {
+            margin-top: 20px;
+        }
+
+        .name-member {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .img-logo {
+            border-radius: 50px;
+        }
+        /*fix reponsive-mobile css content ckeditor*/
+        #content-detail img {
+            max-width: 100% !important;
+            width: 100% !important;
+            height: auto !important;
+        }
+
+    </style>
+</head>
+<body>
+<div class="header">
+    <div class="wrap container">
+        <div class="logo img-logo">
+            <a href="#">
+                <img
+                        src="https://diembao.net/uploads/default/original/1X/cd57c25cf2a9f0ce5b3e3c806b2565b967d25b34.png"
+                        alt=""
+                />
+            </a>
+        </div>
+        <div class="group-items">
+            <button class="btn btn-custom">Sign in</button>
+            <button class="btn btn-custom">Log in</button>
+        </div>
+    </div>
+</div>
+
+<div class="content container">
+    <div class="voting-title">
+        <div class="voting">
+            <div class="count" th:text="${newbNews.votes}"></div>
+            <div class="text-voting">
+                <button class="btn btn-custom1">Vote</button>
+            </div>
+        </div>
+        <div class="topic">
+            <h2 style="margin-bottom: -2px;" th:text="${newbNews.title}"></h2>
+            <h5>
+                <span class="badge badge-green" th:text="${newbNews.typeNews}"></span>
+            </h5>
+        </div>
+    </div>
+    <div class="topic-area row">
+        <div class="col-9" style="position: static">
+            <hr />
+            <div class="info-post">
+                <div class="avatar-member float-left">
+                    <img
+                            class="img-logo"
+                            src="https://diembao.net/letter_avatar_proxy/v4/letter/s/db5fbb/45.png"
+                            alt=""
+                    />
+                </div>
+                <div class="name-member">
+                    <h5 style="margin-left: 10px; color: #1e89cd">sosteddy</h5>
+                    <h5 style="color: #1e89cd" th:text="${newbNews.activity}+ d"></h5>
+                </div>
+                <div class="" style="margin-left: 50px; margin-top: 25px" id="content-detail" >
+<!--                    <img style="border-radius: 15px; float: left; width: -webkit-fill-available; margin-bottom: 15px";-->
+<!--                         th:src="@{'/home/getimage/'+${newbNews.image}}"-->
+<!--                    />-->
+                    <p th:utext="${newbNews.iconLike}"></p>
+                    <p>Nguồn : hoa rừng</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-3"></div>
+    </div>
+</div>
+</body>
+</html>

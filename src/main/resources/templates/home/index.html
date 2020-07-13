@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>News</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <link
+            rel="stylesheet"
+            th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}"
+            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+            crossorigin="anonymous"
+    />
+    <script th:src="@{https://code.jquery.com/jquery-3.2.1.slim.min.js}" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script
+            th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js}"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"
+    ></script>
+    <script
+            th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js}"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"
+    ></script>
+    <link
+            rel="stylesheet"
+            th:href="@{https://use.fontawesome.com/releases/v5.7.0/css/all.css}"
+            integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
+            crossorigin="anonymous"
+    />
+
+    <style>
+        html {
+            font-family: "Muli", sans-serif;
+        }
+
+        .header {
+            height: 60px;
+            background-color: white;
+            box-shadow: 0px 0px 5px 0px;
+            position: sticky;
+            top: 0px;
+        }
+
+        .wrap {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .logo img {
+            height: 2.5em;
+        }
+
+        .img-logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .group-items {
+            display: flex;
+            align-items: center;
+        }
+
+        .btn-custom {
+            background-color: #0f4466;
+            color: white;
+            padding: 6px 10px;
+            height: 30px;
+            margin-left: 10px;
+            padding-top: 1px;
+        }
+
+        .btn-custom:hover {
+            background-color: #98cef0;
+            color: #0f4466;
+        }
+
+        .content {
+            margin-top: 20px;
+        }
+
+        .h-content {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .btn-demo {
+            background-color: white;
+            padding: 6px 10px;
+            height: 30px;
+            padding-top: 1px;
+        }
+
+        .btn-demo:hover {
+            background-color: #98cef0;
+            color: #0f4466;
+        }
+
+        .btn-select {
+            background: #fff;
+            color: #0f4466;
+            border: 1px solid #54ade6;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            height: 30px;
+        }
+
+        .active {
+            color: white;
+            background-color: #0f4466;
+        }
+
+        .thumbnail {
+            border-radius: 3px;
+        }
+
+        .topic {
+            display: flex;
+        }
+
+        .topic-title {
+            font-size: 1.1487em;
+        }
+
+        .topic-detail {
+            margin-left: 20px;
+        }
+
+        .all-detail {
+            display: flex;
+        }
+
+        .topic-list .posters {
+            width: 146px;
+        }
+
+        .topic-list .posts {
+            width: 65px;
+        }
+
+        .topic-list .views {
+            width: 65px;
+        }
+
+        .topic-list .activity {
+            width: 65px;
+        }
+
+        .table th {
+            font-weight: normal;
+            color: #54ade6;
+        }
+
+        .fa-heart {
+            color: #54ade6;
+        }
+
+        .fa-heart:hover {
+            color:red;
+        }
+
+        .topic-votes {
+            margin-left: 10px;
+        }
+
+        .topic-category {
+            margin-left: 10px;
+        }
+
+        .table td, .table th {
+            vertical-align: inherit;
+        }
+        .badge-green {
+            background-color: #12a89d;
+            color: white;
+        }
+
+        body {
+            overflow-x: hidden;
+        }
+        body h2,
+        body li {
+            font-family: "Roboto", sans-serif;
+        }
+        .header {
+            background-color: white;
+            box-shadow: 0 0.25rem 0.125rem 0 rgba(0, 0, 0, 0.05);
+            height: 64px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        .logo {
+            font-weight: bold;
+            font-size: 25px;
+        }
+        .header i {
+            display: none;
+        }
+        .nav {
+            display: flex;
+            flex-flow: wrap;
+        }
+        .nav li {
+            line-height: 30px;
+            width: 100px;
+            text-align: center;
+        }
+
+        @media only screen and (max-width: 633px) {
+            .nav {
+                display: none;
+            }
+            .header i {
+                display: block;
+                position: absolute;
+                left: 20px;
+            }
+            .header {
+                justify-content: center;
+            }
+
+
+        }
+
+        .sidebar {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            text-align: initial;
+        }
+
+        li a {
+            display: block;
+            color: #000;
+            padding: 8px 16px;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        li a:hover {
+            background-color: #555555;
+            color: white;
+            text-decoration: none;
+        }
+
+        .h-content ul {
+            padding: 0;
+            display:table;
+            width:100%;
+            box-sizing:border-box;
+            -moz-box-sizing:border-box;
+            -webkit-box-sizing:border-box;
+        }
+        .h-content ul li {
+            background-color: white;
+            display:table-cell;
+        }
+        .h-content ul li:nth-child(2n) {
+            /*background-color: #0F0;*/
+        }
+
+    </style>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+</head>
+<body>
+<!--Menu tab mobile-->
+<div class="w3-sidebar w3-bar-block w3-border-right" style="display:none" id="mySidebar">
+
+    <a href="#" class="w3-bar-item"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQLcJh7wG90BCRl6-DOjT9X14NCBge2wnyIWc9kTh5ejwMTtd01&usqp=CAU" style="width: 100px; height: 100px;     border-radius: 50%;
+    margin: 25px;"  alt=""></a>
+    <div class="group-items" style="margin-left: 13px;">
+        <button class="btn btn-custom">Sign in</button>
+        <button class="btn btn-custom">Log in</button>
+    </div>
+    <hr style="margin-left: 15px;
+    margin-right: 15px;">
+
+    <div style="text-align: center;">
+        <ul class="sidebar">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#home">Products</a></li>
+            <li><a href="#home">Details</a></li>
+            <li><a href="#home">Where to buy</a></li>
+            <li><a href="#home">Contact</a></li>
+            <li><a href="#home">About</a></li>
+        </ul>
+    </div>
+
+</div>
+
+<div class="header">
+    <i class="fas fa-bars" id="openSidebar"></i>
+    <!-- <h2 class="logo">MY LOGO</h2> -->
+    <div class="logo img-logo" >
+        <a href="#">
+            <img
+                    src="https://diembao.net/uploads/default/original/1X/cd57c25cf2a9f0ce5b3e3c806b2565b967d25b34.png"
+                    alt=""
+            />
+        </a>
+    </div>
+    <ul class="nav">
+        <div class="group-items">
+            <button class="btn btn-custom">Sign in</button>
+            <button class="btn btn-custom">Log in</button>
+        </div>
+    </ul>
+</div>
+<div class="content container">
+    <div class="h-content">
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#news">News</a></li>
+            <li><a href="#about">About</a></li>
+        </ul>
+
+    </div>
+    <div class="b-content">
+        <div class="table-responsive">
+            <table class="table topic-list" id="table">
+                <thead>
+                <tr>
+                    <th style="border: none" class="default">Topic</th>
+                    <th style="border: none" class="posters"></th>
+                    <th style="border: none" class="posts sortable num">Replies</th>
+                    <th style="border: none" class="views sortable num">Views</th>
+                    <th style="border: none" class="activity sortable num">Activity</th>
+                </tr>
+                </thead>
+                <tbody th:if="${page.content}">
+                <tr th:each="eachRow, iterStat : ${page.content}">
+                    <th scope="row">
+                        <div class="topic">
+                            <div class="topic-thumbnail">
+                                <a th:href="@{/home/detail.html/{id}(id=${eachRow.id})}" >
+                                    <img
+                                            class="thumbnail"
+                                            th:src="@{'getimage/'+${eachRow.image}}"
+                                            style="height: 100px; width: 100px;"
+                                    /></a>
+                            </div>
+                            <div class="topic-detail"><div>
+                                <a style="text-decoration: none;" th:href="@{/home/detail.html/{id}(id=${eachRow.id})}"><div class="topic-title"  th:text="${eachRow.title}"></div></a>
+                                <div>
+                                    <div class="all-detail">
+                                        <div class="topic-icon">
+                                            <div class="content-icon">
+
+                                                <i class="fas fa-heart"></i>
+
+                                            </div>
+                                        </div>
+                                        <div class="topic-category" >
+                                            <span class="badge badge-green" th:text="${eachRow.typeNews}"></span>
+                                        </div>
+                                        <div class="topic-votes" th:text="${eachRow.votes} + votes"></div>
+                                    </div>
+                                </div>
+                            </div>
+                    </th>
+                    <td><a href="#"><img src="https://diembao.net/letter_avatar_proxy/v4/letter/s/db5fbb/25.png" style="border-radius: 50%;" alt=""></a></td>
+                    <td th:text="${eachRow.replies}" style="color:#54ade6"></td>
+                    <td th:text="${eachRow.views} + k"> </td>
+                    <td th:text="${eachRow.activity} + d" style="color:#54ade6"> </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script>
+
+    // reponsive menu mobile
+    $(document).ready(function () {
+        $('#openSidebar').click(function (event) {
+            $('#mySidebar').show();
+            event.stopPropagation();
+        });
+
+        $('#mySidebar').click(function (event) {
+            event.stopPropagation();
+        });
+
+        $('html, body').click(function (event) {
+            $('#mySidebar').hide();
+        });
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        var win = $(window);
+        var doc = $(document);
+        var i=0;
+        win.scroll(function() {
+            if (doc.height() - win.height() - win.scrollTop() <= 50) {
+                // console.log(doc.height() - win.height());
+                // console.log(win.scrollTop());
+                i++;
+                // alert("xxxxxxxx::"+i);
+                $.ajax({
+                    'type': 'GET',
+                    'url': '/home/ajaxtest.html?page='+i,
+                    //   'data': '{"page":"' + i + '"}',
+                    success: function (response) {
+                        $('#table').append(response);
+                    },
+                    error: function (response) {
+                        //  console.log(response);
+                    }
+                });
+
+            }
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <jmxConfigurator />
+    <property name="prefix" value="sbclient_proj"/>
+    <property name="logging.directory" value="C:\\logs\\"/>
+    <!--<property name="MESSAGE_FORMAT" value="%d{yyyy/MM/dd} %d{HH:mm:ss.SSS} %5(%.-5level): %-50(%logger{0}.%M[%line]) | %message %throwable%n"/>-->
+    <property name="MESSAGE_FORMAT" value="%d{yyyy/MM/dd} %d{HH:mm:ss.SSS} %5(%.-5level) %-50(%logger{25}.%M[%line]) | %message %throwable%n"/>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>
+                ${MESSAGE_FORMAT}
+            </pattern>
+        </encoder>
+    </appender>
+
+    <appender name="MAIN" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily and size rollover -->
+            <fileNamePattern>${logging.directory}/${prefix}/${prefix}-log-%d{yyyy-MM-dd}.%i.txt</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>${MESSAGE_FORMAT}</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+    </appender>
+
+    <logger name="vn.vano" level="DEBUG" />
+    <logger name="org.hibernate" level="ERROR" />
+<!--    <logger name="vn.hbm.core.repository" level="ERROR" />-->
+
+    <root level="WARN">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="MAIN"/>
+    </root>
+</configuration>

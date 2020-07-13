@@ -1,0 +1,60 @@
+<tbody th:if="${page.content}">
+<tr th:each="eachRow, iterStat : ${page.content}">
+    <th scope="row">
+        <div class="topic">
+            <div class="topic-thumbnail">
+                <a th:href="@{/home/detail.html/{id}(id=${eachRow.id})}">
+                    <img
+                            class="thumbnail"
+                            th:src="@{'getimage/'+${eachRow.image}}"
+                            style="height: 100px; width: 100px;"
+                    /></a>
+            </div>
+            <div class="topic-detail">
+                <div class="topic-title" th:text="${eachRow.title}"></div>
+                <div class="all-detail">
+                    <div class="topic-icon" style="display: inline-block;
+                    padding: .25em .4em;
+                    font-size: 75%;
+                    font-weight: 700;
+                    line-height: 1;
+                    text-align: center;
+                    white-space: nowrap;
+                    vertical-align: baseline;
+                    border-radius: .25rem;">
+                        <div class="content-icon">
+
+                            <i class="fas fa-heart"></i>
+
+                        </div>
+                    </div>
+                    <div class="topic-category"  style=" background-color: #12a89d;color: white; display: inline-block;
+                    padding: .25em .4em;
+                    font-size: 75%;
+                    font-weight: 700;
+                    line-height: 1;
+                    text-align: center;
+                    white-space: nowrap;
+                    vertical-align: baseline;
+                    border-radius: .25rem;"
+                         th:text="${eachRow.typeNews}"></div>
+                    <div class="topic-votes" style="display: inline-block;
+                    padding: .25em .4em;
+                    font-size: 75%;
+                    font-weight: 700;
+                    line-height: 1;
+                    text-align: center;
+                    white-space: nowrap;
+                    vertical-align: baseline;
+                    border-radius: .25rem;"
+                         th:text="${eachRow.votes}+ votes"></div>
+                </div>
+            </div>
+        </div>
+    </th>
+    <td><a href="#"><img src="https://diembao.net/letter_avatar_proxy/v4/letter/s/db5fbb/25.png" style="border-radius: 50%;" alt=""></a></td>
+    <td th:text="${eachRow.replies}" style="color: #54ade6"></td>
+    <td th:text="${eachRow.views} + k"> </td>
+    <td th:text="${eachRow.activity} + d" style="color: #54ade6"> </td>
+</tr>
+</tbody>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<content th:replace="contents/init :: head"></content>
+	<title>Trang chủ</title>
+</head>
+<body class="app sidebar-mini rtl" >
+<div id="global-loader" ></div>
+<div class="page">
+	<div class="page-main">
+		<content th:replace="contents/menu-bar :: content"></content>
+
+		<!-- Main Content-->
+		<div class="app-content ">
+			<div class="side-app">
+				<div class="main-content">
+					<!--Top Navigator-->
+					<content th:replace="contents/top-nav :: content"></content>
+					<div class="container-fluid" style="min-height: 400px; padding-top: 4rem">
+						<!-- Short menu -->
+						<!--<div class="page-header mt-0 shadow p-3">-->
+							<!--<ol class="breadcrumb mb-sm-0">-->
+								<!--<li class="breadcrumb-item"><a th:href="@{/home/index.html}"><i class="side-menu__icon fe fe-home"></i></a></li>-->
+								<!--<li class="breadcrumb-item active" aria-current="page">TOPUP đơn lẻ</li>-->
+							<!--</ol>-->
+						<!--</div>-->
+
+						<div class="row">
+							<div class="col-md-12 pad10_lr">
+								<div class="card shadow">
+									<!--<div class="card-header">-->
+										<!--<h2 class="mb-0"></h2>-->
+									<!--</div>-->
+
+									<div class="card-body">
+										<form th:object="${frmObj}" th:action="@{/tools/calm}" method="POST" class="frmMain">
+											<div class="row">
+												<div class="col-md-5">
+													<div class="form-group">
+														<!--<label class="form-label">GHI CHÚ</label>-->
+														<textarea class="form-control" rows="8" type="text" name="smsTextPlain" placeholder=""></textarea>
+													</div>
+												</div>
+												<div class="col-md-1">
+													<div style="margin-bottom: .9rem">
+														<button type="submit" class="btn btn-primary btn-width100 mag-bot-5">TÁCH</button>
+														<a href="#" class="btn btn-success btn-width100">TÍNH</a>
+													</div>
+
+												</div>
+												<div class="col-md-6">
+													<div class="form-group">
+														<!--<label class="form-label">GHI CHÚ</label>-->
+														<textarea class="form-control" rows="8" type="text" name="smsTextFormat" placeholder="" disabled="disabled"></textarea>
+													</div>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--Footer-->
+					<content th:replace="contents/footer :: content"></content>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Back to top -->
+<a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
+<content th:replace="contents/init :: script"></content>
+</body>
+</html>
